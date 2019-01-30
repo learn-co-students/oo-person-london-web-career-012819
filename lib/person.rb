@@ -1,4 +1,4 @@
-# your code goes here
+# your code goes here something something
 class Person
   attr_accessor :bank_account
   attr_reader :name, :happiness, :hygiene
