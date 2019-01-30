@@ -3,8 +3,8 @@ require 'pry'
 
 class Person
 
-  attr_reader :name
-  attr_accessor :bank_account, :hygiene, :happiness
+  attr_reader :name, :hygiene, :happiness
+  attr_accessor :bank_account
 
 
   def initialize(name)
@@ -20,7 +20,7 @@ class Person
   end
 
   def clean?
-    if @hygiene > 7
+    if hygiene > 7
       return true
     else
       false
@@ -28,7 +28,7 @@ class Person
   end
 
   def happy?
-    if @happiness > 7
+    if happiness > 7
       return true
     else
       false
@@ -36,46 +36,58 @@ class Person
   end
 
   def take_bath
-    @hygiene += 4
-    hygiene
+    self.hygiene += 4
     return "♪ Rub-a-dub just relaxing in the tub ♫"
   end
 
   def work_out
-    @happiness += 2
-    @hygiene -= 3
-    hygiene
-    happiness
+    self.happiness += 2
+    self.hygiene -= 3
     return "♪ another one bites the dust ♫"
   end
 
-  def happiness(num)
-    @hygiene = num
-      if @happiness > 10
-        @happiness = 10
-      elsif @happiness < 0
-        @happiness = 0
-      end
+  def happiness=(num)
+    @happiness = num
+    if num > 10
+      @happiness = 10
+    elsif num < 0
+      @happiness = 0
+    else
+      @happiness
+    end
   end
 
 
-  def hygiene(num)
+  def hygiene=(num)
     @hygiene = num
-    if @hygiene > 10
+    if num > 10
       @hygiene = 10
-    elsif @hygiene < 0
+    elsif num < 0
       @hygiene = 0
+    else
+      @hygiene
     end
   end
 
   def call_friend(friend)
-    "Hi #{friend.name}! It's #{@name}. How are you?"
-    @happiness += 3
-    happiness
+    self.happiness += 3
     friend.happiness += 3
+    "Hi #{friend.name}! It's #{@name}. How are you?"
   end
 
-  def start_conversation()
-  end
+  def start_conversation(friend, topic)
+  case topic
+    when "politics"
+      self.happiness -=2
+      friend.happiness -=2
+      return "blah blah partisan blah lobbyist"
+    when "weather"
+      self.happiness +=1
+      friend.happiness +=1
+      return"blah blah sun blah rain"
 
+    else
+      'blah blah blah blah blah'
+    end
+  end
 end
