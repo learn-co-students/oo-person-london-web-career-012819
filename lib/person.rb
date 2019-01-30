@@ -1,6 +1,4 @@
-# your code goes herebu
-#Sofia did most of this, I typed it.
-#
+
 
 class Person
 attr_writer :bank_account
